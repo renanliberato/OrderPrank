@@ -25,7 +25,18 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     private JButton jbOrdenar,jbSair,jbArquivo;
 
     // Nesse ponto vocês deverão acrescentar novos métodos
-    private String []metodos={"Seleção", "Bolha","Inserção", "QuickSort","ShellSort"};
+    private String[] metodos = {
+            "Seleção - double",
+            "Seleção - String",
+            "Bolha - double",
+            "Bolha - String",
+            "Inserção - double",
+            "Inserção - String",
+            "QuickSort - double",
+            "QuickSort - String",
+            "ShellSort - double",
+            "ShellSort - String"
+    };
 
     private JFileChooser arquivo;
 
@@ -104,7 +115,8 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     public void leitura(String arquivo, String diretorio)
     {
         Classificacao c = new Classificacao();
-        int metodo,i;
+        ClassificacaoStrings cStrings = new ClassificacaoStrings();
+        int metodo, i;
         double vet[];
         Scanner input = new Scanner(System.in);
         Date data = new Date();
@@ -131,22 +143,47 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
                     break;
                 case 1:
                     dataInicial = System.currentTimeMillis();
-                    vet=c.bubble(vet);
+                    vet = cStrings.selecao(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 2:
                     dataInicial = System.currentTimeMillis();
-                    vet=c.insercao(vet);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 3:
-                    dataInicial = System.currentTimeMillis();
-                    vet=c.quickSort(vet, 0, vet.length-1);
+                    vet = c.bubble(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 4:
                     dataInicial = System.currentTimeMillis();
-                    vet=c.shellSort(vet);
+                    vet = cStrings.bubble(vet);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 5:
+                    dataInicial = System.currentTimeMillis();
+                    vet = c.insercao(vet);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 6:
+                    dataInicial = System.currentTimeMillis();
+                    vet = cStrings.insercao(vet);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 7:
+                    dataInicial = System.currentTimeMillis();
+                    vet = c.quickSort(vet, 0, vet.length-1);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 8:
+                    dataInicial = System.currentTimeMillis();
+                    vet = cStrings.quickSort(vet, 0, vet.length-1);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 9:
+                    dataInicial = System.currentTimeMillis();
+                    vet = c.shellSort(vet);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 10:
+                    dataInicial = System.currentTimeMillis();
+                    vet = cStrings.shellSort(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 default:
