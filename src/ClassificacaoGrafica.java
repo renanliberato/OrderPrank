@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -27,17 +29,17 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     // Nesse ponto vocês deverão acrescentar novos métodos
     private String[] metodos = {
             "Seleção - double",
-            "Seleção - String",
             "Bolha - double",
-            "Bolha - String",
             "Inserção - double",
-            "Inserção - String",
             "QuickSort - double",
-            "QuickSort - String",
             "ShellSort - double",
+            "Seleção - String",
+            "Bolha - String",
+            "Inserção - String",
+            "QuickSort - String",
             "ShellSort - String"
     };
-
+    // jcbMetodos.getSelectedItem()
     private JFileChooser arquivo;
 
     private String caminhoArquivo, diretorio;
@@ -115,9 +117,11 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     public void leitura(String arquivo, String diretorio)
     {
         Classificacao c = new Classificacao();
-        ClassificacaoStrings cStrings = new ClassificacaoStrings();
         int metodo, i;
-        double vet[];
+        String[] vet;
+        double[] vetDouble;
+        String method = "";
+
         Scanner input = new Scanner(System.in);
         Date data = new Date();
 
@@ -125,55 +129,104 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
             BufferedReader in = new BufferedReader(new FileReader(arquivo));
 
             max = Integer.parseInt(in.readLine());
-            vet = new double[max];
-            i   = 0;
-
-            while (in.ready()) {
-                vet[i]=Double.parseDouble(in.readLine());
-                i++;
-            }
-            in.close();
+            vet = new String[max];
+            vetDouble = new double[max];
 
             //Neste ponto voces deverâo acrescentar novos itens case para outros métodos de ordenação
             switch(jcbMetodos.getSelectedIndex()){
                 case 0:
+                    method = "double";
+                    break;
+                case 1:
+                    method = "double";
+                    break;
+                case 2:
+                    method = "double";
+                    break;
+                case 3:
+                    method = "double";
+                    break;
+                case 4:
+                    method = "double";
+                    break;
+                case 5:
+                    method = "String";
+                    break;
+                case 6:
+                    method = "String";
+                    break;
+                case 7:
+                    method = "String";
+                    break;
+                case 8:
+                    method = "String";
+                    break;
+                case 9:
+                    method = "String";
+                    break;
+                default:
+                    System.out.println("Opção Inválida");
+                    break;
+            }
+            i = 0;
+            if (method == "String"){
+                while (in.ready()) {
+                    vet[i] = in.readLine();
+                    i++;
+                }
+            } else if (method == "double") {
+                while (in.ready()) {
+                    vetDouble[i] = Double.parseDouble(in.readLine());
+                    i++;
+                }
+            }
+
+
+            in.close();
+            switch(jcbMetodos.getSelectedIndex()){
+                case 0:
                     dataInicial = System.currentTimeMillis();
-                    vet = c.selecao(vet);
-                    dataFinal = System.currentTimeMillis();
+                    vetDouble   = c.selecao(vetDouble);
+                    dataFinal   = System.currentTimeMillis();
                     break;
                 case 1:
                     dataInicial = System.currentTimeMillis();
-                    vet = cStrings.selecao(vet);
+                    vetDouble = c.bubble(vetDouble);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 2:
                     dataInicial = System.currentTimeMillis();
-                    vet = c.bubble(vet);
+                    vetDouble = c.insercao(vetDouble);
+                    dataFinal = System.currentTimeMillis();
+                    break;
+                case 3:
+                    dataInicial = System.currentTimeMillis();
+                    vetDouble = c.quickSort(vetDouble, 0, vetDouble.length-1);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 4:
                     dataInicial = System.currentTimeMillis();
-                    vet = cStrings.bubble(vet);
+                    vetDouble = c.shellSort(vetDouble);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 5:
                     dataInicial = System.currentTimeMillis();
-                    vet = c.insercao(vet);
+                    vet = c.selecao(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 6:
                     dataInicial = System.currentTimeMillis();
-                    vet = cStrings.insercao(vet);
+                    vet = c.bubble(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 7:
                     dataInicial = System.currentTimeMillis();
-                    vet = c.quickSort(vet, 0, vet.length-1);
+                    vet = c.insercao(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 8:
                     dataInicial = System.currentTimeMillis();
-                    vet = cStrings.quickSort(vet, 0, vet.length-1);
+                    vet = c.quickSort(vet, 0, vet.length-1);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 9:
@@ -181,17 +234,17 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
                     vet = c.shellSort(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
-                case 10:
-                    dataInicial = System.currentTimeMillis();
-                    vet = cStrings.shellSort(vet);
-                    dataFinal = System.currentTimeMillis();
-                    break;
                 default:
                     System.out.println("Opção Inválida");
                     break;
             }
+
             in.close();
-            gravacao(vet);
+            if(method == "double")
+                gravacao(vetDouble);
+            else if (method == "String")
+                gravacao(vet);
+
         } catch (IOException e) {
             System.out.println("Erro na gravação do arquivo");
         }
@@ -200,13 +253,42 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     //Este método realiaza a gravação do arquivo de saida
     public void gravacao(double vet[])
     {
+
         String valor="", arquivoSaida="";
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
         try {
             arquivoSaida = (String)jcbMetodos.getSelectedItem();
-
+            arquivoSaida = arquivoSaida.split(" ", 2)[0] + "_" + arquivoSaida.split(" ", 2)[2];
             diretorio = diretorio.replace("\\", "/");
-            arquivoSaida = diretorio + "/" + arquivoSaida + ".txt";
+            arquivoSaida = diretorio + "/" + timeStamp + "_" + arquivoSaida + ".txt";
+            File saida;
+            saida = new File(arquivoSaida);
+            FileOutputStream out = new FileOutputStream(saida);
+            for (int j = 0; j < max; j++) {
+                valor = String.valueOf(vet[j]) + " \n";
+                out.write(valor.getBytes());
+            }
+            out.close();
+        }
+        catch (IOException e) {
+            System.out.println("Erro na gravação do arquivo");
+        }
+
+        jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (dataFinal - dataInicial)/1000 + " segundos");
+        jtaSaida.enable(false);
+    }
+
+    public void gravacao(String vet[])
+    {
+        String valor="", arquivoSaida="";
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+        try {
+            arquivoSaida = (String)jcbMetodos.getSelectedItem();
+            arquivoSaida = arquivoSaida.split(" ", 2)[0] + "_" + arquivoSaida.split(" ", 2)[2];
+            diretorio = diretorio.replace("\\", "/");
+            arquivoSaida = diretorio + "/" + timeStamp + "_" + arquivoSaida + ".txt";
             File saida;
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
