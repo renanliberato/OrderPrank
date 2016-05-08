@@ -1,26 +1,26 @@
 public class Sort
 {
-    public double[] selecao(double[] vetor)
+    public double[] selecao(double[] list)
     {
-        double menor;
-        int indiceMenor;
+        double smaller;
+        int smallerIndex;
 
-        for (int i = 0; i < vetor.length - 1; i++) {
-            menor = vetor[i];
-            indiceMenor = i;
+        for (int i = 0; i < list.length - 1; i++) {
+            smaller = list[i];
+            smallerIndex = i;
 
-            for (int j = i + 1; j < vetor.length; j++){
-                if (vetor[j] < menor){
-                    menor = vetor[j];
-                    indiceMenor = j;
+            for (int j = i + 1; j < list.length; j++) {
+
+                if (list[j] < smaller) {
+                    smaller = list[j];
+                    smallerIndex = j;
                 }
             }
-
-            vetor[indiceMenor] = vetor[i];
-            vetor[i] = menor;
+            list[smallerIndex] = list[i];
+            list[i] = smaller;
         }
 
-        return vetor;
+        return list;
     }
 
     public String[] selecao(String[] vetor)
