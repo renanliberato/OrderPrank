@@ -193,57 +193,52 @@ public class Sort
         return list;
     }
 
-    public double[] shellSort(double[] arr)
+    public double[] shellSort(double[] list)
     {
         int h=1;
-        while(h<= arr.length/3){
-            h = 3*h + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
+
+        while ( h <= list.length / 3) {
+            h = 3 * h + 1;
         }
 
-        //next section
-        while(h>0){    //for array of length 10, h=4
+        while (h > 0) {
 
-            //similar to insertion sort below
-            for(int i=0; i<arr.length; i++){
-
-                double temp = arr[i];
+            for (int i = 0; i < list.length; i++) {
+                double temp = list[i];
                 int j;
 
-                for(j=i; j>h-1 && arr[j-h] >= temp; j=j-h){
-                    arr[j] = arr[j-h];
+                for (j = i; j > h-1 && list[j - h] >= temp; j = j - h) {
+                    list[j] = list[j - h];
                 }
-                arr[j] = temp;
-            }
-            h = (h-1)/3;
-        }
-
-        return arr;
-    }
-
-    public String[] shellSort(String[] arr)
-    {
-        int h=1;
-        while (h <= arr.length / 3) {
-            h = 3*h + 1;   //h is equal to highest sequence of h<=length/3 (1,4,13,40...)
-        }
-
-        //next section
-        while (h > 0) {    //for array of length 10, h=4
-
-            //similar to insertion sort below
-            for (int i = 0; i < arr.length; i++) {
-
-                String temp = arr[i];
-                int j;
-
-                for (j = i; j > h - 1 && (arr[j - h].compareTo(temp) >= 0); j = j - h) {
-                    arr[j] = arr[j - h];
-                }
-                arr[j] = temp;
+                list[j] = temp;
             }
             h = (h - 1) / 3;
         }
 
-        return arr;
+        return list;
+    }
+
+    public String[] shellSort(String[] list)
+    {
+        int h = 1;
+        while (h <= list.length / 3) {
+            h = 3 * h + 1;
+        }
+
+        while (h > 0) {
+
+            for (int i = 0; i < list.length; i++) {
+                String temp = list[i];
+                int j;
+
+                for (j = i; j > h - 1 && (list[j - h].compareTo(temp) >= 0); j = j - h) {
+                    list[j] = list[j - h];
+                }
+                list[j] = temp;
+            }
+            h = (h - 1) / 3;
+        }
+
+        return list;
     }
 }
