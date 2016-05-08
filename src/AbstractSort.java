@@ -5,15 +5,15 @@ public abstract class AbstractSort
 {
     public abstract double[] selection(double[] list);
 
-    public abstract String[] selecao(String[] list);
+    public abstract String[] selection(String[] list);
 
     public abstract double[] bubble(double[] list);
 
     public abstract String[] bubble(String[] list);
 
-    public abstract double[] insercao(double[] list);
+    public abstract double[] insertion(double[] list);
 
-    public abstract String[] insercao(String[] list);
+    public abstract String[] insertion(String[] list);
 
     public abstract double[] quickSort(double[] list, int low, int high);
 
