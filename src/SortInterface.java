@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
-public class ClassificacaoGrafica extends JFrame implements ActionListener
+public class SortInterface extends JFrame implements ActionListener
 {
     //Classe Gráfica - declaração dos componentes (objetos) e variáveis de instãncia
     private JPanel p1,p2,p3;
@@ -49,7 +49,7 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     private int max;
 
     //Construtor da classe - irá inicializar os objetos e variáveis de instãncia
-    public ClassificacaoGrafica()
+    public SortInterface()
     {
         caminhoArquivo="";
 
@@ -308,6 +308,6 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
 
     public static void main(String args[])
     {
-        ClassificacaoGrafica cg = new ClassificacaoGrafica();
+        SortInterface cg = new SortInterface();
     }
 }
