@@ -1,4 +1,4 @@
-public class Classificacao
+public class Sort
 {
     public double[] selecao(double[] vetor)
     {

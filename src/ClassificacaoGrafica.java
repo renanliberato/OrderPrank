@@ -116,7 +116,7 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
     //Este método realiaza a leitura do arquivo e realiza a atribuição ao vetor a ser classificado
     public void leitura(String arquivo, String diretorio)
     {
-        Classificacao c = new Classificacao();
+        Sort c = new Sort();
         int metodo, i;
         String[] vet;
         double[] vetDouble;
