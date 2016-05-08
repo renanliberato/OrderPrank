@@ -1,4 +1,4 @@
-public class Sort
+public class Sort extends AbstractSort
 {
     public double[] selection(double[] list)
     {
