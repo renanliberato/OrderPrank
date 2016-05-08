@@ -23,27 +23,27 @@ public class Sort
         return list;
     }
 
-    public String[] selecao(String[] vetor)
+    public String[] selecao(String[] list)
     {
-        String menor;
-        int indiceMenor;
+        String smaller;
+        int smallerIndex;
 
-        for (int i = 0; i < vetor.length - 1; i++) {
-            menor = vetor[i];
-            indiceMenor = i;
+        for (int i = 0; i < list.length - 1; i++) {
+            smaller = list[i];
+            smallerIndex = i;
 
-            for (int j = i + 1; j < vetor.length; j++){
-                if (vetor[j].compareTo(menor) < 0){
-                    menor = vetor[j];
-                    indiceMenor = j;
+            for (int j = i + 1; j < list.length; j++){
+                if (list[j].compareTo(smaller) < 0){
+                    smaller = list[j];
+                    smallerIndex = j;
                 }
             }
 
-            vetor[indiceMenor] = vetor[i];
-            vetor[i] = menor;
+            list[smallerIndex] = list[i];
+            list[i] = smaller;
         }
 
-        return vetor;
+        return list;
     }
 
     public double[] bubble(double[] vetor)
