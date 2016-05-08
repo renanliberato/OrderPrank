@@ -1,6 +1,6 @@
 public class Sort
 {
-    public double[] selecao(double[] list)
+    public double[] selection(double[] list)
     {
         double smaller;
         int smallerIndex;
@@ -23,7 +23,7 @@ public class Sort
         return list;
     }
 
-    public String[] selecao(String[] list)
+    public String[] selection(String[] list)
     {
         String smaller;
         int smallerIndex;
@@ -88,7 +88,7 @@ public class Sort
         return vetor;
     }
 
-    public double[] insercao(double[] list)
+    public double[] insertion(double[] list)
     {
         double key;
         int i;
@@ -105,7 +105,7 @@ public class Sort
         return list;
     }
 
-    public String[] insercao(String[] list)
+    public String[] insertion(String[] list)
     {
         String key;
         int i;

@@ -186,7 +186,7 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
             switch(jcbMetodos.getSelectedIndex()){
                 case 0:
                     dataInicial = System.currentTimeMillis();
-                    vetDouble   = c.selecao(vetDouble);
+                    vetDouble   = c.selection(vetDouble);
                     dataFinal   = System.currentTimeMillis();
                     break;
                 case 1:
@@ -196,7 +196,7 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
                     break;
                 case 2:
                     dataInicial = System.currentTimeMillis();
-                    vetDouble = c.insercao(vetDouble);
+                    vetDouble = c.insertion(vetDouble);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 3:
@@ -211,7 +211,7 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
                     break;
                 case 5:
                     dataInicial = System.currentTimeMillis();
-                    vet = c.selecao(vet);
+                    vet = c.selection(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 6:
@@ -221,7 +221,7 @@ public class ClassificacaoGrafica extends JFrame implements ActionListener
                     break;
                 case 7:
                     dataInicial = System.currentTimeMillis();
-                    vet = c.insercao(vet);
+                    vet = c.insertion(vet);
                     dataFinal = System.currentTimeMillis();
                     break;
                 case 8:
