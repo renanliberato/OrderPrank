@@ -46,41 +46,41 @@ public class Sort
         return list;
     }
 
-    public double[] bubble(double[] vetor)
+    public double[] bubble(double[] list)
     {
         int j;
-        boolean flag = true;   // set flag to true to begin first pass
-        double temp;   //holding variable
+        boolean flag = true;
+        double temp;
 
-        while ( flag ) {
-            flag= false;    //set flag to false awaiting a possible swap
-            for( j=0;  j < vetor.length -1;  j++ ) {
-                if ( vetor[ j ] < vetor[j+1] ){ // change to > for ascending sort
-                    temp = vetor[ j ];                //swap elements
-                    vetor[ j ] = vetor[ j+1 ];
-                    vetor[ j+1 ] = temp;
-                    flag = true;              //shows a swap occurred
+        while (flag) {
+            flag = false;
+            for (j = 0; j < list.length - 1; j++) {
+                if (list[j] < list[j + 1]) {
+                    temp = list[j];
+                    list[j] = list[j + 1];
+                    list[j + 1] = temp;
+                    flag = true;
                 }
             }
         }
 
-        return vetor;
+        return list;
     }
 
     public String[] bubble(String[] vetor)
     {
         int j;
-        boolean flag = true;   // set flag to true to begin first pass
-        String temp;   //holding variable
+        boolean flag = true;
+        String temp;
 
         while (flag) {
-            flag = false;    //set flag to false awaiting a possible swap
+            flag = false;
             for(j = 0; j < vetor.length - 1; j++) {
-                if ( vetor[j].compareTo(vetor[j + 1]) < 0){ // change to > for ascending sort
-                    temp = vetor[j];                //swap elements
+                if (vetor[j].compareTo(vetor[j + 1]) < 0) {
+                    temp = vetor[j];
                     vetor[j] = vetor[j + 1];
                     vetor[j + 1] = temp;
-                    flag = true;              //shows a swap occurred
+                    flag = true;
                 }
             }
         }
