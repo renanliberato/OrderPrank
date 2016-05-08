@@ -6,10 +6,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
 
 public class SortInterface extends JFrame implements ActionListener
 {
@@ -48,7 +47,18 @@ public class SortInterface extends JFrame implements ActionListener
 
     private int max;
 
-    //Construtor da classe - irá inicializar os objetos e variáveis de instãncia
+    private String method;
+
+    private String[] vet;
+
+    private double[] vetDouble;
+
+    private FileReader fileReader;
+
+    private BufferedReader in;
+
+    private Sort c;
+
     public SortInterface()
     {
         caminhoArquivo="";
@@ -93,7 +103,6 @@ public class SortInterface extends JFrame implements ActionListener
         setVisible(true);
     }
 
-    //Este método controla todos os eventos de botões
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == jbArquivo) {
@@ -113,144 +122,106 @@ public class SortInterface extends JFrame implements ActionListener
         }
     }
 
-    //Este método realiaza a leitura do arquivo e realiza a atribuição ao vetor a ser classificado
     public void leitura(String arquivo, String diretorio)
     {
-        Sort c = new Sort();
-        int metodo, i;
+        c = new Sort();
+        int i;
         String[] vet;
         double[] vetDouble;
         String method = "";
 
-        Scanner input = new Scanner(System.in);
-        Date data = new Date();
-
         try {
-            BufferedReader in = new BufferedReader(new FileReader(arquivo));
+            this.fileReader = new FileReader(arquivo);
 
-            max = Integer.parseInt(in.readLine());
-            vet = new String[max];
-            vetDouble = new double[max];
+            this.in = new BufferedReader(this.fileReader);
 
-            //Neste ponto voces deverâo acrescentar novos itens case para outros métodos de ordenação
-            switch(jcbMetodos.getSelectedIndex()){
-                case 0:
-                    method = "double";
-                    break;
-                case 1:
-                    method = "double";
-                    break;
-                case 2:
-                    method = "double";
-                    break;
-                case 3:
-                    method = "double";
-                    break;
-                case 4:
-                    method = "double";
-                    break;
-                case 5:
-                    method = "String";
-                    break;
-                case 6:
-                    method = "String";
-                    break;
-                case 7:
-                    method = "String";
-                    break;
-                case 8:
-                    method = "String";
-                    break;
-                case 9:
-                    method = "String";
-                    break;
-                default:
-                    System.out.println("Opção Inválida");
-                    break;
+            max = Integer.parseInt(this.in.readLine());
+            this.vet = new String[max];
+            this.vetDouble = new double[max];
+
+            if (this.jcbMetodos.getSelectedIndex() <= 4) {
+                readListDouble();
+            } else {
+                readListString();
             }
-            i = 0;
-            if (method == "String"){
-                while (in.ready()) {
-                    vet[i] = in.readLine();
-                    i++;
-                }
-            } else if (method == "double") {
-                while (in.ready()) {
-                    vetDouble[i] = Double.parseDouble(in.readLine());
-                    i++;
-                }
-            }
-
-
-            in.close();
-            switch(jcbMetodos.getSelectedIndex()){
-                case 0:
-                    dataInicial = System.currentTimeMillis();
-                    vetDouble   = c.selection(vetDouble);
-                    dataFinal   = System.currentTimeMillis();
-                    break;
-                case 1:
-                    dataInicial = System.currentTimeMillis();
-                    vetDouble = c.bubble(vetDouble);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 2:
-                    dataInicial = System.currentTimeMillis();
-                    vetDouble = c.insertion(vetDouble);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 3:
-                    dataInicial = System.currentTimeMillis();
-                    vetDouble = c.quickSort(vetDouble, 0, vetDouble.length-1);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 4:
-                    dataInicial = System.currentTimeMillis();
-                    vetDouble = c.shellSort(vetDouble);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 5:
-                    dataInicial = System.currentTimeMillis();
-                    vet = c.selection(vet);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 6:
-                    dataInicial = System.currentTimeMillis();
-                    vet = c.bubble(vet);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 7:
-                    dataInicial = System.currentTimeMillis();
-                    vet = c.insertion(vet);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 8:
-                    dataInicial = System.currentTimeMillis();
-                    vet = c.quickSort(vet, 0, vet.length-1);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                case 9:
-                    dataInicial = System.currentTimeMillis();
-                    vet = c.shellSort(vet);
-                    dataFinal = System.currentTimeMillis();
-                    break;
-                default:
-                    System.out.println("Opção Inválida");
-                    break;
-            }
-
-            in.close();
-            if(method == "double")
-                gravacao(vetDouble);
-            else if (method == "String")
-                gravacao(vet);
 
         } catch (IOException e) {
-            System.out.println("Erro na gravação do arquivo");
+            System.out.println("Erro na leitura do arquivo");
         }
     }
 
-    //Este método realiaza a gravação do arquivo de saida
+    public void readListDouble()
+    {
+        try {
+            int i = 0;
+            while (this.in.ready()) {
+                vetDouble[i] = Double.parseDouble(in.readLine());
+                i++;
+            }
+            this.in.close();
+            sort(vetDouble);
+
+        } catch(IOException e) {
+            System.out.println("Erro na leitura do arquivo");
+        }
+    }
+
+    public void readListString()
+    {
+        try {
+            int i = 0;
+            while (this.in.ready()) {
+                vet[i] = in.readLine();
+                i++;
+            }
+            this.in.close();
+            sort(vet);
+
+        } catch(IOException e) {
+            System.out.println("Erro na leitura do arquivo");
+        }
+    }
+
+    public void sort(double[] vetDouble)
+    {
+        dataInicial = System.currentTimeMillis();
+
+        switch (jcbMetodos.getSelectedIndex()) {
+            case 0:
+                this.vetDouble = c.selection(vetDouble);
+            case 1:
+                this.vetDouble = c.bubble(vetDouble);
+            case 2:
+                this.vetDouble = c.insertion(vetDouble);
+            case 3:
+                this.vetDouble = c.quickSort(vetDouble, 0, vetDouble.length-1);
+            case 4:
+                this.vetDouble = c.shellSort(vetDouble);
+        }
+        dataFinal = System.currentTimeMillis();
+            gravacao(this.vetDouble);
+    }
+
+    public void sort(String[] vet)
+    {
+        dataInicial = System.currentTimeMillis();
+
+        switch (jcbMetodos.getSelectedIndex()) {
+            case 5:
+                this.vet = c.selection(vet);
+            case 6:
+                this.vet = c.bubble(vet);
+            case 7:
+                this.vet = c.insertion(vet);
+            case 8:
+                this.vet = c.quickSort(vet, 0, vet.length-1);
+            case 9:
+                this.vet = c.shellSort(vet);
+        }
+        dataFinal = System.currentTimeMillis();
+        gravacao(vet);
+    }
+
     public void gravacao(double vet[])
     {
 
@@ -258,10 +229,12 @@ public class SortInterface extends JFrame implements ActionListener
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
         try {
-            arquivoSaida = (String)jcbMetodos.getSelectedItem();
-            arquivoSaida = arquivoSaida.split(" ", 2)[0] + "_" + arquivoSaida.split(" ", 2)[2];
+            String methodName = (String)jcbMetodos.getSelectedItem();
+            String[] methodNameArray = methodName.split(" ");
+            methodName = methodNameArray[0] + "_" + methodNameArray[2];
+
             diretorio = diretorio.replace("\\", "/");
-            arquivoSaida = diretorio + "/" + timeStamp + "_" + arquivoSaida + ".txt";
+            arquivoSaida = diretorio + "/" + timeStamp + "_" + methodName + ".txt";
             File saida;
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
@@ -285,10 +258,12 @@ public class SortInterface extends JFrame implements ActionListener
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
         try {
-            arquivoSaida = (String)jcbMetodos.getSelectedItem();
-            arquivoSaida = arquivoSaida.split(" ", 2)[0] + "_" + arquivoSaida.split(" ", 2)[2];
+            String methodName = (String)jcbMetodos.getSelectedItem();
+            String[] methodNameArray = methodName.split(" ");
+            methodName = methodNameArray[0] + "_" + methodNameArray[2];
+
             diretorio = diretorio.replace("\\", "/");
-            arquivoSaida = diretorio + "/" + timeStamp + "_" + arquivoSaida + ".txt";
+            arquivoSaida = diretorio + "/" + timeStamp + "_" + methodName + ".txt";
             File saida;
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
