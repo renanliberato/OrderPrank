@@ -122,90 +122,75 @@ public class Sort
         return list;
     }
 
-    public double[] quickSort(double[] arr, int low, int high) {
-        double[] empty = new double[0];
-
-        if (arr == null || arr.length == 0)
-            return empty;
-
-        if (low >= high)
-            return empty;
-
-        // pick the pivot
+    public double[] quickSort(double[] list, int low, int high)
+    {
         int middle = low + (high - low) / 2;
-        double pivot = arr[middle];
-
-        // make left < pivot and right > pivot
+        double pivot = list[middle];
         int i = low, j = high;
+
         while (i <= j) {
-            while (arr[i] < pivot) {
+            while (list[i] < pivot) {
                 i++;
             }
 
-            while (arr[j] > pivot) {
+            while (list[j] > pivot) {
                 j--;
             }
 
             if (i <= j) {
-                double temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                double temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
                 i++;
                 j--;
             }
         }
 
-        // recursively sort two sub parts
-        if (low < j)
-            quickSort(arr, low, j);
+        if (low < j) {
+            quickSort(list, low, j);
+        }
 
-        if (high > i)
-            quickSort(arr, i, high);
+        if (high > i) {
+            quickSort(list, i, high);
+        }
 
-        return arr;
+        return list;
     }
 
-    public String[] quickSort(String[] arr, int low, int high) {
-        String[] empty = new String[0];
-
-        if (arr == null || arr.length == 0)
-            return empty;
-
-        if (low >= high)
-            return empty;
-
-        // pick the pivot
+    public String[] quickSort(String[] list, int low, int high)
+    {
         int middle = low + (high - low) / 2;
-        String pivot = arr[middle];
-
-        // make left < pivot and right > pivot
+        String pivot = list[middle];
         int i = low, j = high;
+
         while (i <= j) {
-            while (arr[i].compareTo(pivot) < 0) {
+
+            while (list[i].compareTo(pivot) < 0) {
                 i++;
             }
 
-            while (arr[j].compareTo(pivot) > 0) {
+            while (list[j].compareTo(pivot) > 0) {
                 j--;
             }
 
             if (i <= j) {
-                String temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                String temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
                 i++;
                 j--;
             }
         }
 
-        // recursively sort two sub parts
-        if (low < j)
-            quickSort(arr, low, j);
+        if (low < j) {
+            quickSort(list, low, j);
+        }
 
-        if (high > i)
-            quickSort(arr, i, high);
+        if (high > i) {
+            quickSort(list, i, high);
+        }
 
-        return arr;
+        return list;
     }
 
     public double[] shellSort(double[] arr)
