@@ -88,40 +88,38 @@ public class Sort
         return vetor;
     }
 
-    public double[] insercao(double[] vetor)
+    public double[] insercao(double[] list)
     {
-        int j;
         double key;
         int i;
 
-        for (j = 1; j < vetor.length; j++) {
-            key = vetor[j];
+        for (int j = 1; j < list.length; j++) {
+            key = list[j];
 
-            for (i = j - 1; (i >= 0) && (vetor[i] > key); i--) {
-                vetor[i + 1] = vetor[i];
+            for (i = j - 1; (i >= 0) && (list[i] > key); i--) {
+                list[i + 1] = list[i];
             }
-            vetor[i + 1] = key;
+            list[i + 1] = key;
         }
 
-        return vetor;
+        return list;
     }
 
-    public String[] insercao(String[] vetor)
+    public String[] insercao(String[] list)
     {
-        int j;
         String key;
         int i;
 
-        for (j = 1; j < vetor.length; j++) {
-            key = vetor[j];
+        for (int j = 1; j < list.length; j++) {
+            key = list[j];
 
-            for (i = j - 1; (i >= 0) && (vetor[i].compareTo(key) > 0); i--) {
-                vetor[i + 1] = vetor[i];
+            for (i = j - 1; (i >= 0) && (list[i].compareTo(key) > 0); i--) {
+                list[i + 1] = list[i];
             }
-            vetor[i + 1] = key;
+            list[i + 1] = key;
         }
 
-        return vetor;
+        return list;
     }
 
     public double[] quickSort(double[] arr, int low, int high) {
