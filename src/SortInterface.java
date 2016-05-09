@@ -27,41 +27,27 @@ public class SortInterface extends JFrame implements ActionListener
 
     // Nesse ponto vocês deverão acrescentar novos métodos
     private String[] metodos = {
-            "Seleção - double",
-            "Bolha - double",
-            "Inserção - double",
+            "Selection - Bubble",
+            "Bubble - double",
+            "Insertion - double",
             "QuickSort - double",
             "ShellSort - double",
-            "Seleção - String",
-            "Bolha - String",
-            "Inserção - String",
+            "Selection - String",
+            "Bubble - String",
+            "Insertion - String",
             "QuickSort - String",
             "ShellSort - String"
     };
     // jcbMetodos.getSelectedItem()
     private JFileChooser arquivo;
 
-    private String caminhoArquivo, diretorio;
-
     private long dataInicial,dataFinal;
 
-    private int max;
-
-    private String method;
-
-    private String[] vet;
-
-    private double[] vetDouble;
-
-    private FileReader fileReader;
-
-    private BufferedReader in;
-
-    private Sort c;
+    private String caminhoArquivo, diretorio;
 
     public SortInterface()
     {
-        caminhoArquivo="";
+        caminhoArquivo = "";
 
         p1 = new JPanel(new GridLayout(4,2));
         p2 = new JPanel();
@@ -115,170 +101,21 @@ public class SortInterface extends JFrame implements ActionListener
             jtfArquivo.setText(caminhoArquivo);
         }
         if (e.getSource() == jbOrdenar) {
-            leitura(caminhoArquivo,diretorio);
+            SortManager sortManager = new SortManager();
+
+            String methodParam = (String)jcbMetodos.getSelectedItem();
+            sortManager.setMethod(methodParam.split(" "));
+            sortManager.start(caminhoArquivo, diretorio);
+
+            this.dataInicial = sortManager.getDataInicial();
+            this.dataFinal   = sortManager.getDataFinal();
+
+            jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (this.dataFinal - this.dataInicial)/1000 + " segundos");
+            jtaSaida.enable(false);
         }
         if (e.getSource() == jbSair) {
             System.exit(0);
         }
-    }
-
-    public void leitura(String arquivo, String diretorio)
-    {
-        c = new Sort();
-        int i;
-        String[] vet;
-        double[] vetDouble;
-        String method = "";
-
-        try {
-            this.fileReader = new FileReader(arquivo);
-
-            this.in = new BufferedReader(this.fileReader);
-
-            max = Integer.parseInt(this.in.readLine());
-            this.vet = new String[max];
-            this.vetDouble = new double[max];
-
-            if (this.jcbMetodos.getSelectedIndex() <= 4) {
-                readListDouble();
-            } else {
-                readListString();
-            }
-
-        } catch (IOException e) {
-            System.out.println("Erro na leitura do arquivo");
-        }
-    }
-
-    public void readListDouble()
-    {
-        try {
-            int i = 0;
-            while (this.in.ready()) {
-                vetDouble[i] = Double.parseDouble(in.readLine());
-                i++;
-            }
-            this.in.close();
-            sort(vetDouble);
-
-        } catch(IOException e) {
-            System.out.println("Erro na leitura do arquivo");
-        }
-    }
-
-    public void readListString()
-    {
-        try {
-            int i = 0;
-            while (this.in.ready()) {
-                vet[i] = in.readLine();
-                i++;
-            }
-            this.in.close();
-            sort(vet);
-
-        } catch(IOException e) {
-            System.out.println("Erro na leitura do arquivo");
-        }
-    }
-
-    public void sort(double[] vetDouble)
-    {
-        dataInicial = System.currentTimeMillis();
-
-        switch (jcbMetodos.getSelectedIndex()) {
-            case 0:
-                this.vetDouble = c.selection(vetDouble);
-            case 1:
-                this.vetDouble = c.bubble(vetDouble);
-            case 2:
-                this.vetDouble = c.insertion(vetDouble);
-            case 3:
-                this.vetDouble = c.quickSort(vetDouble, 0, vetDouble.length-1);
-            case 4:
-                this.vetDouble = c.shellSort(vetDouble);
-        }
-        dataFinal = System.currentTimeMillis();
-            gravacao(this.vetDouble);
-    }
-
-    public void sort(String[] vet)
-    {
-        dataInicial = System.currentTimeMillis();
-
-        switch (jcbMetodos.getSelectedIndex()) {
-            case 5:
-                this.vet = c.selection(vet);
-            case 6:
-                this.vet = c.bubble(vet);
-            case 7:
-                this.vet = c.insertion(vet);
-            case 8:
-                this.vet = c.quickSort(vet, 0, vet.length-1);
-            case 9:
-                this.vet = c.shellSort(vet);
-        }
-        dataFinal = System.currentTimeMillis();
-        gravacao(vet);
-    }
-
-    public void gravacao(double vet[])
-    {
-
-        String valor="", arquivoSaida="";
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-
-        try {
-            String methodName = (String)jcbMetodos.getSelectedItem();
-            String[] methodNameArray = methodName.split(" ");
-            methodName = methodNameArray[0] + "_" + methodNameArray[2];
-
-            diretorio = diretorio.replace("\\", "/");
-            arquivoSaida = diretorio + "/" + timeStamp + "_" + methodName + ".txt";
-            File saida;
-            saida = new File(arquivoSaida);
-            FileOutputStream out = new FileOutputStream(saida);
-            for (int j = 0; j < max; j++) {
-                valor = String.valueOf(vet[j]) + " \n";
-                out.write(valor.getBytes());
-            }
-            out.close();
-        }
-        catch (IOException e) {
-            System.out.println("Erro na gravação do arquivo");
-        }
-
-        jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (dataFinal - dataInicial)/1000 + " segundos");
-        jtaSaida.enable(false);
-    }
-
-    public void gravacao(String vet[])
-    {
-        String valor="", arquivoSaida="";
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-
-        try {
-            String methodName = (String)jcbMetodos.getSelectedItem();
-            String[] methodNameArray = methodName.split(" ");
-            methodName = methodNameArray[0] + "_" + methodNameArray[2];
-
-            diretorio = diretorio.replace("\\", "/");
-            arquivoSaida = diretorio + "/" + timeStamp + "_" + methodName + ".txt";
-            File saida;
-            saida = new File(arquivoSaida);
-            FileOutputStream out = new FileOutputStream(saida);
-            for (int j=0; j<max; j++) {
-                valor = String.valueOf(vet[j]) + "\n";
-                out.write(valor.getBytes());
-            }
-            out.close();
-        }
-        catch (IOException e) {
-            System.out.println("Erro na gravação do arquivo");
-        }
-
-        jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (dataFinal - dataInicial)/1000 + " segundos");
-        jtaSaida.enable(false);
     }
 
     public static void main(String args[])
