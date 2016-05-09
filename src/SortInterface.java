@@ -27,7 +27,7 @@ public class SortInterface extends JFrame implements ActionListener
 
     // Nesse ponto vocês deverão acrescentar novos métodos
     private String[] metodos = {
-            "Selection - Bubble",
+            "Selection - double",
             "Bubble - double",
             "Insertion - double",
             "QuickSort - double",
@@ -104,13 +104,11 @@ public class SortInterface extends JFrame implements ActionListener
             SortManager sortManager = new SortManager();
 
             String methodParam = (String)jcbMetodos.getSelectedItem();
+
             sortManager.setMethod(methodParam.split(" "));
             sortManager.start(caminhoArquivo, diretorio);
 
-            this.dataInicial = sortManager.getDataInicial();
-            this.dataFinal   = sortManager.getDataFinal();
-
-            jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (this.dataFinal - this.dataInicial)/1000 + " segundos");
+            jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (sortManager.getDataFinal() - sortManager.getDataInicial())/1000 + " segundos");
             jtaSaida.enable(false);
         }
         if (e.getSource() == jbSair) {
