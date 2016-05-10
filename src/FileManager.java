@@ -79,7 +79,7 @@ public class FileManager
         return stringList;
     }
 
-    public void recordDouble(double vet[])
+    public void recordDouble(double doubleList[])
     {
         String valor="", arquivoSaida="";
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
@@ -93,7 +93,7 @@ public class FileManager
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
             for (int j = 0; j < max; j++) {
-                valor = String.valueOf(vet[j]) + " \n";
+                valor = String.valueOf(doubleList[j]) + " \n";
                 out.write(valor.getBytes());
             }
             out.close();
@@ -103,7 +103,7 @@ public class FileManager
         }
     }
 
-    public void recordString(String vet[])
+    public void recordString(String stringList[])
     {
         String valor="", arquivoSaida="";
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
@@ -118,9 +118,39 @@ public class FileManager
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
             for (int j=0; j<max; j++) {
-                valor = String.valueOf(vet[j]) + "\n";
+                valor = String.valueOf(stringList[j]) + "\n";
                 out.write(valor.getBytes());
             }
+            out.close();
+        }
+        catch (IOException e) {
+            System.out.println("Erro na gravação do arquivo");
+        }
+    }
+
+    public void recordLog(long dataInicial, long dataFinal)
+    {
+        String valor="", arquivoSaida="", arquivoResult = "";
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+        try {
+            String methodName = this.method[0] + "_" + this.method[2];
+
+            arquivoResult = this.filePath + "/" + timeStamp + "_" + methodName + ".txt";
+
+            this.filePath = this.filePath.replace("\\", "/");
+            arquivoSaida = this.filePath + "/sortLog.txt";
+            File saida;
+            saida = new File(arquivoSaida);
+            FileOutputStream out = new FileOutputStream(saida, true);
+            valor = "\n \n ------------------------------------ \n \n";
+            valor += "Arquivo desordenado: " + this.file + " \n ";
+            valor += "Arquivo ordenado: " + arquivoResult + " \n ";
+            valor += "Método: " + methodName + " \n ";
+            valor += "dataFinal: " + dataFinal + " \n ";
+            valor += "dataInicial: " + dataInicial + " \n ";
+            valor += "tempoResultante: " + (dataFinal - dataInicial) + " \n ";
+            out.write(valor.getBytes());
             out.close();
         }
         catch (IOException e) {

@@ -31,6 +31,7 @@ public class SortManager extends Sort
             sortString();
             fileManager.recordString(stringList);
         }
+        fileManager.recordLog(this.dataInicial, this.dataFinal);
     }
 
     public void sortDouble()
