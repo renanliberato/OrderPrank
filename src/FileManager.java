@@ -148,7 +148,7 @@ public class FileManager
             valor += methodName + ",";
             valor += dataFinal + ",";
             valor += dataInicial + ",";
-            valor += (dataFinal - dataInicial);
+            valor += (dataFinal - dataInicial) + ",";
             valor += new SimpleDateFormat("yyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime()) + " \n";
             out.write(valor.getBytes());
             out.close();
