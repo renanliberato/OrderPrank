@@ -88,7 +88,7 @@ public class FileManager
             String methodName = this.method[0] + "_" + this.method[2];
 
             this.filePath = this.filePath.replace("\\", "/");
-            arquivoSaida = this.filePath + "/" + timeStamp + "_" + methodName + ".txt";
+            arquivoSaida = this.filePath + "/result/" + timeStamp + "_" + methodName + ".txt";
             File saida;
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
@@ -113,7 +113,7 @@ public class FileManager
 
             this.filePath = this.filePath.replace("\\", "/");
 
-            arquivoSaida = this.filePath + "/" + timeStamp + "_" + methodName + ".txt";
+            arquivoSaida = this.filePath + "/result/" + timeStamp + "_" + methodName + ".txt";
             File saida;
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida);
@@ -136,20 +136,20 @@ public class FileManager
         try {
             String methodName = this.method[0] + "_" + this.method[2];
 
-            arquivoResult = this.filePath + "/" + timeStamp + "_" + methodName + ".txt";
+            arquivoResult = timeStamp + "_" + methodName + ".txt";
 
             this.filePath = this.filePath.replace("\\", "/");
-            arquivoSaida = this.filePath + "/sortLog.txt";
+            arquivoSaida = this.filePath + "/sortLogCSV.csv";
             File saida;
             saida = new File(arquivoSaida);
             FileOutputStream out = new FileOutputStream(saida, true);
-            valor = "\n \n ------------------------------------ \n \n";
-            valor += "Arquivo desordenado: " + this.file + " \n ";
-            valor += "Arquivo ordenado: " + arquivoResult + " \n ";
-            valor += "Método: " + methodName + " \n ";
-            valor += "dataFinal: " + dataFinal + " \n ";
-            valor += "dataInicial: " + dataInicial + " \n ";
-            valor += "tempoResultante: " + (dataFinal - dataInicial) + " \n ";
+            valor  = this.file + ",";
+            valor += arquivoResult + ",";
+            valor += methodName + ",";
+            valor += dataFinal + ",";
+            valor += dataInicial + ",";
+            valor += (dataFinal - dataInicial);
+            valor += new SimpleDateFormat("yyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime()) + " \n";
             out.write(valor.getBytes());
             out.close();
         }
