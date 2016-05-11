@@ -1,5 +1,10 @@
 public class Sort extends AbstractSort
 {
+    /**
+     * Método de ordenação de uma lista double através do algorítmo de seleção
+     * @param list lista desordenada de valores double.
+     * @return lista ordenada de valores double.
+     */
     public double[] selection(double[] list)
     {
         double smaller;
@@ -23,6 +28,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista de Strings através do algorítmo de seleção
+     * @param list lista desordenada de valores String.
+     * @return lista ordenada de valores String.
+     */
     public String[] selection(String[] list)
     {
         String smaller;
@@ -46,6 +56,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista double através do algorítmo bubbleSort
+     * @param list lista desordenada de valores double.
+     * @return lista ordenada de valores double.
+     */
     public double[] bubble(double[] list)
     {
         int j;
@@ -67,6 +82,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista de Strings através do algorítmo bubbleSort
+     * @param list lista desordenada de valores String.
+     * @return lista ordenada de valores String.
+     */
     public String[] bubble(String[] vetor)
     {
         int j;
@@ -88,6 +108,11 @@ public class Sort extends AbstractSort
         return vetor;
     }
 
+    /**
+     * Método de ordenação de uma lista double através do algorítmo de inserção
+     * @param list lista desordenada de valores double.
+     * @return lista ordenada de valores double.
+     */
     public double[] insertion(double[] list)
     {
         double key;
@@ -105,6 +130,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista de Strings através do algorítmo de inserção
+     * @param list lista desordenada de valores String.
+     * @return lista ordenada de valores String.
+     */
     public String[] insertion(String[] list)
     {
         String key;
@@ -122,6 +152,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista double através do algorítmo de quickSort
+     * @param list lista desordenada de valores double.
+     * @return lista ordenada de valores double.
+     */
     public double[] quickSort(double[] list, int low, int high)
     {
         int middle = low + (high - low) / 2;
@@ -157,6 +192,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista double através do algorítmo shellSort
+     * @param list lista desordenada de valores double.
+     * @return lista ordenada de valores double.
+     */
     public String[] quickSort(String[] list, int low, int high)
     {
         int middle = low + (high - low) / 2;
@@ -193,6 +233,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista double através do algorítmo shellSort
+     * @param list lista desordenada de valores double.
+     * @return lista ordenada de valores double.
+     */
     public double[] shellSort(double[] list)
     {
         int h=1;
@@ -218,6 +263,11 @@ public class Sort extends AbstractSort
         return list;
     }
 
+    /**
+     * Método de ordenação de uma lista de Strings através do algorítmo shellSort
+     * @param list lista desordenada de valores String.
+     * @return lista ordenada de valores String.
+     */
     public String[] shellSort(String[] list)
     {
         int h = 1;
