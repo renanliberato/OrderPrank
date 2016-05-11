@@ -174,7 +174,7 @@ public class SortManager extends Sort
      */
     public void setMethod(String[] method) {
         this.method = method;
-        
+
         fileManager.setMethod(method);
     }
 }
