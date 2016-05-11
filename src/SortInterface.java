@@ -12,20 +12,39 @@ import java.util.Calendar;
 
 public class SortInterface extends JFrame implements ActionListener
 {
-    //Classe Gráfica - declaração dos componentes (objetos) e variáveis de instãncia
+    /**
+     * Grids de layout
+     */
     private JPanel p1,p2,p3;
 
+    /**
+     * Label dos botões da interface.
+     */
     private JLabel jlMetodo,jlArquivo,jlSaida;
 
-    private JComboBox jcbMetodos;
-
-    private JTextField jtfArquivo;
-
-    private JTextArea jtaSaida;
-
+    /**
+     * Botões da interface.
+     */
     private JButton jbOrdenar,jbSair,jbArquivo;
 
-    // Nesse ponto vocês deverão acrescentar novos métodos
+    /**
+     * Select box de métodos.
+     */
+    private JComboBox jcbMetodos;
+
+    /**
+     * Input do caminho do arquivo.
+     */
+    private JTextField jtfArquivo;
+
+    /**
+     * Textarea onde é exibido o resultado da ordenação.
+     */
+    private JTextArea jtaSaida;
+
+    /**
+     * Lista de métodos que aparecerão na interface para seleção.
+     */
     private String[] metodos = {
             "Selection - double",
             "Bubble - double",
@@ -38,13 +57,19 @@ public class SortInterface extends JFrame implements ActionListener
             "QuickSort - String",
             "ShellSort - String"
     };
-    // jcbMetodos.getSelectedItem()
+    /**
+     * Variável resultante do arquivo a ser modificado.
+     */
     private JFileChooser arquivo;
 
-    private long dataInicial,dataFinal;
-
+    /**
+     * Variáveis que armazenam o caminho do arquivo e seu diretório.
+     */
     private String caminhoArquivo, diretorio;
 
+    /**
+     * Método construtor que gera o layout na tela e inicializa seus componentes.
+     */
     public SortInterface()
     {
         caminhoArquivo = "";
@@ -89,6 +114,10 @@ public class SortInterface extends JFrame implements ActionListener
         setVisible(true);
     }
 
+    /**
+     * Listener que é acionado ao pressionar algum botão da interface.
+     * @param e evento gerado da ação do usuário, possuindo todos os recursos necessários para tomadas de ação.
+     */
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == jbArquivo) {
@@ -106,8 +135,8 @@ public class SortInterface extends JFrame implements ActionListener
             String methodParam = (String)jcbMetodos.getSelectedItem();
 
             sortManager.setMethod(methodParam.split(" "));
-
-            sortManager.start(caminhoArquivo, diretorio);
+            for(int k = 0; k <= 50; k++)
+                sortManager.start(caminhoArquivo, diretorio);
 
             jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem() + "\n" + "Tempo de execução: " + (sortManager.getDataFinal() - sortManager.getDataInicial())/1000 + " segundos");
             jtaSaida.enable(false);
@@ -117,6 +146,10 @@ public class SortInterface extends JFrame implements ActionListener
         }
     }
 
+    /**
+     * Método estático inicializador do programa, responsável por chamar o construtor da classe.
+     * @param args argumentos opcionais.
+     */
     public static void main(String args[])
     {
         SortInterface cg = new SortInterface();
