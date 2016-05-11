@@ -8,17 +8,39 @@ import java.util.Calendar;
  */
 public class FileManager
 {
+    /**
+     * Atributo para armazenamento do cmainho do arquivo a ser ordenado e de sua pasta,
+     * vindos do SortManager.
+     */
     private String file, filePath;
 
+    /**
+     * Vetor de métodos vindo de SortManager.
+     */
     private String[] method;
 
+    /**
+     * Objeto utilizado para a leitura de arquivos.
+     */
     private FileReader fileReader;
 
+    /**
+     * Valor gerado nos método de leitura readDouble e readString.
+     * Delimitador do tamanho do vetor de números desordenados.
+     */
     private int max;
 
+    /**
+     * Objeto utilizado durante a leitura do arquivo
+     */
     private BufferedReader in;
 
 
+    /**
+     * Método criado para armazenar as dependências da classe.
+     * @param file caminho do arquivo a ser ordenado
+     * @param filePath pasta onde o arquivo a ser ordenado está.
+     */
     public void setFile(String file, String filePath)
     {
         this.file = file;
@@ -33,11 +55,19 @@ public class FileManager
 
     }
 
+    /**
+     * Setter do vetor do método selecionado.
+     * @param method
+     */
     public void setMethod(String[] method)
     {
         this.method = method;
     }
 
+    /**
+     * Método responsável por ler o arquivo com dados double desordenados.
+     * @return Retorna um vetor de doubles de tamanho this.max desordenados.
+     */
     public double[] readDouble()
     {
 
@@ -59,6 +89,10 @@ public class FileManager
         return doubleList;
     }
 
+    /**
+     * Método responsável por ler o arquivo com dados String desordenados.
+     * @return Retorna um vetor de Strings de tamanho this.max desordenados.
+     */
     public String[] readString()
     {
         String[] stringList = new String[0];
@@ -79,6 +113,10 @@ public class FileManager
         return stringList;
     }
 
+    /**
+     * Método responsável por gravar o arquivo de doubles ordenados.
+     * @param doubleList Lista de doubles ordenados para gravação no arquivo.
+     */
     public void recordDouble(double doubleList[])
     {
         String valor="", arquivoSaida="";
@@ -103,6 +141,10 @@ public class FileManager
         }
     }
 
+    /**
+     * Método responsável por gravar o arquivo de Strings ordenadas.
+     * @param stringList Lista de Strings ordenadas para gravação no arquivo.
+     */
     public void recordString(String stringList[])
     {
         String valor="", arquivoSaida="";
@@ -128,6 +170,11 @@ public class FileManager
         }
     }
 
+    /**
+     * Método repsonsável por gerar o relatório de log resultante da ordenação no arquivo sortLogCSV.csv.
+     * @param dataInicial Valor em milisegundos gerado antes da execução do algoritmo de ordenação.
+     * @param dataFinal Valor em milisegundos gerado depois da execução do algoritmo de ordenação.
+     */
     public void recordLog(long dataInicial, long dataFinal)
     {
         String valor="", arquivoSaida="", arquivoResult = "";
