@@ -3,6 +3,9 @@
  */
 public class SortManager extends Sort
 {
+    /**
+     *
+     */
     private long dataInicial, dataFinal;
 
     private String[] method;
@@ -13,11 +16,19 @@ public class SortManager extends Sort
 
     FileManager fileManager;
 
+    /**
+     * Método construtor responsável por instanciar uma dependência, a classe FileManager.
+     */
     public SortManager()
     {
         this.fileManager = new FileManager();
     }
 
+    /**
+     * Método responsável por gerenciar a execução das ordenações.
+     * @param file Caminho do arquivo desordenado.
+     * @param filePath Caminho da pasta onde se encontra o arquivo desordenado.
+     */
     public void start(String file, String filePath)
     {
         fileManager.setFile(file, filePath);
@@ -34,6 +45,9 @@ public class SortManager extends Sort
         fileManager.recordLog(this.dataInicial, this.dataFinal);
     }
 
+    /**
+     * Método responsável por encaminhar o vetor  de double desordenado ao método de ordenação selecionado pelo usuário.
+     */
     public void sortDouble()
     {
         dataInicial = System.currentTimeMillis();
@@ -58,6 +72,9 @@ public class SortManager extends Sort
         dataFinal = System.currentTimeMillis();
     }
 
+    /**
+     * Método responsável por encaminhar o vetor  de Strings desordenado ao método de ordenação selecionado pelo usuário.
+     */
     public void sortString()
     {
         dataInicial = System.currentTimeMillis();
@@ -82,30 +99,54 @@ public class SortManager extends Sort
         dataFinal = System.currentTimeMillis();
     }
 
+    /**
+     * Getter de dataInicial
+     * @return retorna um valor em milisegundos
+     */
     public long getDataInicial()
     {
         return dataInicial;
     }
 
+    /**
+     * Setter de dataInicial
+     * @param dataInicial valor em milisegundos a ser armazenado
+     */
     public void setDataInicial(long dataInicial)
     {
         this.dataInicial = dataInicial;
     }
 
+    /**
+     * Getter de dataFinal
+     * @return retorna um valor em milisegundos
+     */
     public long getDataFinal() {
         return dataFinal;
     }
 
+    /**
+     * Setter de dataFinal
+     * @param dataFinal valor em milisegundos a ser armazenado
+     */
     public void setDataFinal(long dataFinal)
     {
         this.dataFinal = dataFinal;
     }
 
+    /**
+     * Getter do vetor de Strings gerado do seletor de métodos da interface.
+     * @return Retorna um vetor de comprimento 3.
+     */
     public String[] getMethod()
     {
         return method;
     }
 
+    /**
+     * Setter do vetor de Strings gerado do seletor de métodos da interface.
+     * @param method Vetor de Strings de comprimento 3.
+     */
     public void setMethod(String[] method)
     {
         this.method = method;
