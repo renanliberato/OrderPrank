@@ -4,16 +4,28 @@
 public class SortManager extends Sort
 {
     /**
-     *
+     * Valores em milisegundos gerados antes de depois da execução do algoritmo de ordenação.
      */
     private long dataInicial, dataFinal;
 
+    /**
+     * Vetor de comprimento 3 gerado do seletor de métodos da interface.
+     */
     private String[] method;
 
+    /**
+     * Variável onde é armazenado o vetor de strings durante o processo de ordenação.
+     */
     private String[] stringList;
 
+    /**
+     * Variável onde é armazenado o vetor de doubles durante o processo de ordenação.
+     */
     private double[] doubleList;
 
+    /**
+     * Objeto da classe FileManager utilizado na manipulação de arquivos.
+     */
     FileManager fileManager;
 
     /**
