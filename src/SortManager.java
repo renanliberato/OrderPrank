@@ -4,7 +4,7 @@
 public class SortManager extends Sort
 {
     /**
-     * Valores em milisegundos gerados antes de depois da execução do algoritmo de ordenação.
+     * Valores em milisegundos gerados antes e depois da execução do algoritmo de ordenação.
      */
     private long dataInicial, dataFinal;
 
