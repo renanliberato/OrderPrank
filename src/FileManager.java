@@ -50,6 +50,26 @@ public class FileManager
         if (!resultFolder.exists()) {
             resultFolder.mkdirs();
         }
+        File logFile = new File(filePath+"/sortLogCSV.csv");
+
+        if (!logFile.exists()) {
+
+            try {
+                File saida;
+                FileOutputStream out = new FileOutputStream(logFile, true);
+                String valor = "";
+                valor = "Unordered file;Ordered file;Method;Final milliseconds;Initial milliseconds;Time spent(Millis); TimeStamp \n";
+
+                out.write(valor.getBytes());
+
+                out.close();
+            }
+
+            catch (IOException e) {
+
+                System.out.println("Erro na gravação do arquivo");
+            }
+        }
 
         try {
             this.fileReader = new FileReader(file);
