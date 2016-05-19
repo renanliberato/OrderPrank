@@ -130,9 +130,7 @@ public class SortInterface extends JFrame implements ActionListener
 
             sortManager.setMethod(methodParam.split(" "));
 
-            for (int k = 0; k <= 50; k++) {
-                sortManager.start(caminhoArquivo, diretorio);
-            }
+            sortManager.start(caminhoArquivo, diretorio);
 
             jtaSaida.setText("Método:" + (String)jcbMetodos.getSelectedItem()
                     + "\n" + "Tempo de execução: "
