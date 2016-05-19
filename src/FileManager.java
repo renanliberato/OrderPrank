@@ -45,6 +45,12 @@ public class FileManager
         this.file = file;
         this.filePath = filePath;
 
+        File resultFolder = new File(filePath+"/result");
+
+        if (!resultFolder.exists()) {
+            resultFolder.mkdirs();
+        }
+
         try {
             this.fileReader = new FileReader(file);
             this.in = new BufferedReader(this.fileReader);
